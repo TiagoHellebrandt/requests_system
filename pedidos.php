@@ -26,6 +26,8 @@
     <main>
         <div class="container">
 
+            <?php include 'templates/list.php' ?>
+
         </div>
     </main>
 

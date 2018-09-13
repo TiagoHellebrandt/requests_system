@@ -1,0 +1,3 @@
+<?php
+
+$objects = new Manager();
