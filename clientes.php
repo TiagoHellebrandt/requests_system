@@ -29,6 +29,7 @@
     
     <main>
         <div class="container">
+        <?php require_once 'templates/search.php' ?>
         <table class="highlight responsive-table">
             <thead>
                 <th>ID</th>
@@ -41,7 +42,11 @@
 
             <tbody>
                 <?php
-                    $registros = $objects->selectAll("Clientes");
+                    if (!isset($_GET['search'])) {
+                        $registros = $objects->selectAll("Clientes");
+                    } else {
+                        $registros = $objects->search("Clientes", $_GET['search']);
+                    }
                     foreach ($registros as $registro):
                 ?>
                 

@@ -48,8 +48,4 @@ class Clientes {
                 ]
             );
     }
-
-    function search($table, $search) {
-        global $objects;
-    }
 }

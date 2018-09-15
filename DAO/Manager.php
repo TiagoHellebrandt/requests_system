@@ -157,9 +157,20 @@ class Manager {
     }
 
     function search($table, $search) {
-        $q = '';
+        $q = "SELECT * FROM $table WHERE ";
+        $columns = $this->getColumns($table);
+        for ($i=0;$i<count($columns);$i++) {
+            $q .= $columns[$i]." LIKE CONCAT('%', :value$i, '%') or ";
+        }
+        $q = substr($q, 0, -4);
+        $q .= ";";
         try {
             $query = $this->db->prepare($q);
+            for ($i=0;$i<count($columns);$i++) {
+                $query->bindValue(":value$i", $search, PDO::PARAM_STR);
+            }
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOExcepetion $e) {
             return false;
         }
