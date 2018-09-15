@@ -1,3 +1,7 @@
+<?php
+    require_once 'DAO/access.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,9 +29,42 @@
     
     <main>
         <div class="container">
-            
+        <table class="highlight responsive-table">
+            <thead>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th>Data de nascimento</th>
+                <th>Gênero</th>
+            </thead>
+
+            <tbody>
+                <?php
+                    $registros = $objects->selectAll("Clientes");
+                    foreach ($registros as $registro):
+                ?>
+                
+                <tr>
+                    <td><a href="cliente.php?id=<?php echo $registro->id; ?>"><?php echo $registro->id; ?></a></td>
+                    <td><?php echo $registro->nome; ?></td>
+                    <td><?php echo $registro->telefone; ?></td>
+                    <td><?php echo $registro->email; ?></td>
+                    <td><?php echo $registro->nascimento; ?></td>
+                    <td><?php echo $registro->genero; ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
         </div>
     </main>
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large blue waves-effect" href="cliente.php">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
 
     <?php include_once './templates/footer.php' ?>
 </body>

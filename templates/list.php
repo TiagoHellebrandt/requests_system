@@ -15,23 +15,3 @@
         </div>
     </div>
 </div>
-
-<table class="highlight responsive-table">
-    <thead>
-        <th>ID</th>
-        <th>Data do pedido</th>
-        <th>Total de itens</th>
-        <th>Total do pedido</th>
-        <th>Status</th>
-    </thead>
-
-    <tbody>
-        <tr>
-            <td><a href="cliente.php">1</a></td>
-            <td>12/09/2018</td>
-            <td>10</td>
-            <td>R$ 100,00</td>
-            <td>Entregue</td>
-        </tr>
-    </tbody>
-</table>

@@ -26,7 +26,10 @@
     <main>
         <div class="container">
 
-            <?php include 'templates/list.php' ?>
+            <?php 
+                $table = 'Pedidos';
+                include 'templates/list.php';
+            ?>
 
         </div>
     </main>

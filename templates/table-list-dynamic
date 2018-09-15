@@ -1,0 +1,25 @@
+<table class="highlight responsive-table">
+    <thead>
+        <?php
+            $columns = $objects->getColumns($table);
+            for ($i=0;$i<count($columns);$i++):
+        ?>
+            <th><?php echo $columns[$i] ?></th>
+        <?php endfor; ?>
+    </thead>
+
+    <tbody>
+        <?php
+            $registros = $objects->selectAll($table);
+            foreach ($registros as $registro):
+        ?>
+        <tr>
+            <?php
+                foreach ($registro as $prop):
+            ?>
+            <td><a><?php echo $prop; ?></a></td>
+            <?php endforeach; ?>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

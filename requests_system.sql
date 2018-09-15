@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 12-Set-2018 às 23:49
+-- Generation Time: 15-Set-2018 às 11:03
 -- Versão do servidor: 10.0.36-MariaDB-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `Clientes` (
   `id` int(11) NOT NULL,
-  `nome` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
   `telefone` varchar(20) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `nascimento` date DEFAULT NULL,
@@ -112,7 +112,7 @@ ALTER TABLE `Produtos`
 -- AUTO_INCREMENT for table `Clientes`
 --
 ALTER TABLE `Clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `Itens`
 --
