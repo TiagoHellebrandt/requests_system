@@ -43,8 +43,10 @@
                 $email = '';
                 $nascimento = '';
                 $genero = '';
-
-                if (isset($_POST['nome']) 
+                if (isset($_POST["remove"]) && isset($_GET["id"])) {
+                    $clientes->delete($_GET["id"]);
+                    header("location: clientes.php"); // redireciona para pagina dos clientes
+                } else if (isset($_POST['nome']) 
                         && isset($_POST['telefone']) 
                         && isset($_POST['email'])
                         && isset($_POST['nascimento']) 
@@ -118,6 +120,12 @@
                     </div>
                     <button class="waves-effect waves-light btn-large blue"><i class="material-icons left">save</i>Salvar</button>
                 </form>
+                <?php if (isset($_GET['id'])): ?>
+                    <form method="post">
+                        <input type="hidden" value="true" name="remove" />
+                        <button class="waves-effect waves-light btn-large red"><i class="material-icons left">delete</i>Apagar</button>
+                    </form>
+                <?php endif; ?>
             </div>
 
         </div>

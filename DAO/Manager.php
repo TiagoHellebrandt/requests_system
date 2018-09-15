@@ -175,4 +175,27 @@ class Manager {
             return false;
         }
     }
+
+    function getNumRegistros($table) {
+        try {
+            // Cria a query
+            $query = $this->db->prepare("SELECT count(*) FROM $table;");
+            $query->execute(); // Executa a query
+            return $query->fetchAll(PDO::FETCH_ASSOC)[0]["count(*)"];
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    function delete($table, $id) {
+        try {
+            // Cria a query
+            $query = $this->db->prepare("DELETE FROM $table WHERE id=:id;");
+            $query->bindValue(":id", $id, PDO::PARAM_INT);
+            $query->execute(); // Executa a query
+            return $query->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }

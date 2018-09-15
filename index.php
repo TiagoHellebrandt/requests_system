@@ -1,3 +1,7 @@
+<?php
+    require_once 'DAO/access.php';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -49,7 +53,7 @@
                         <div class="card-stacked">
                             <div class="card-content">
                                 <h5>Pedidos</h5>
-                                <h3>0</h3>
+                                <h3><?php echo $objects->getNumRegistros("Pedidos"); ?></h3>
                             </div>
                             <div class="card-action">
                                 <a href="pedidos.php">Mais</a>
@@ -63,7 +67,7 @@
                         <div class="card-stacked">
                             <div class="card-content">
                                 <h5>Produtos</h5>
-                                <h3>0</h3>
+                                <h3><?php echo $objects->getNumRegistros("Produtos"); ?></h3>
                             </div>
                             <div class="card-action">
                                 <a href="produtos.php">Mais</a>
@@ -77,7 +81,7 @@
                         <div class="card-stacked">
                             <div class="card-content">
                                 <h5>Clientes</h5>
-                                <h3>0</h3>
+                                <h3><?php echo $objects->getNumRegistros("Clientes"); ?></h3>
                             </div>
                             <div class="card-action">
                                 <a href="clientes.php">Mais</a>

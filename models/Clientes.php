@@ -48,4 +48,10 @@ class Clientes {
                 ]
             );
     }
+
+    function delete($id) {
+        global $objects;
+        // Deleta um cliente
+        return $objects->delete("Clientes", $id);
+    }
 }
