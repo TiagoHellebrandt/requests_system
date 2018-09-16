@@ -119,6 +119,7 @@
                         </label>
                     </div>
                     <button class="waves-effect waves-light btn-large blue"><i class="material-icons left">save</i>Salvar</button>
+                    
                 </form>
                 <?php if (isset($_GET['id'])): ?>
                     <form method="post">

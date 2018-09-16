@@ -1,3 +1,7 @@
+<?php
+    require_once 'DAO/access.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,9 +29,41 @@
     
     <main>
         <div class="container">
-            
+        <?php require_once 'templates/search.php' ?>
+        <table class="highlight responsive-table">
+            <thead>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+            </thead>
+
+            <tbody>
+                <?php
+                    if (!isset($_GET['search'])) {
+                        $registros = $objects->selectAll("Produtos");
+                    } else {
+                        $registros = $objects->search("Produtos", $_GET['search']);
+                    }
+                    foreach ($registros as $registro):
+                ?>
+                
+                <tr>
+                    <td><a href="produto.php?id=<?php echo $registro->id; ?>"><?php echo $registro->id; ?></a></td>
+                    <td><?php echo $registro->descricao; ?></td>
+                    <td><?php echo $registro->valor; ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
         </div>
     </main>
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large blue waves-effect" href="produto.php">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
 
     <?php include_once './templates/footer.php' ?>
 </body>

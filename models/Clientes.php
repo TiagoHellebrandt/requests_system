@@ -3,14 +3,6 @@ require_once "DAO/access.php";
 
 class Clientes {
 
-    function __construc() {
-
-    }
-
-    function getClientes() {
-
-    }
-
     function getCliente($id) {
         global $objects;
         return $objects->get("Clientes", $id); // Retorna um cliente
