@@ -43,6 +43,7 @@
                 $data_pedido = '';
                 $status = '';
                 $cliente = '';
+                $itens = [];
                 if (isset($_POST["remove"]) && isset($_GET["id"])) {
                     $pedidos->delete($_GET["id"]);
                     header("location: pedidos.php"); // redireciona para pagina dos pedidos
@@ -52,15 +53,22 @@
                     $data_pedido = trim($_POST['data_pedido']); // Nome
                     $status = trim($_POST['status']); // status
                     $cliente = trim($_POST['cliente']); // cliente
+                    $itens = $_POST['itens']; // itens
                     if (isset($_POST['id'])) {
                         $id = $_POST['id'];
                         $pedidos->updatePedido($id, $data_pedido, $status, $cliente);
+                        $pedidos->setItens($id, $itens);
                     } else {
                         $pedidos->setPedido($data_pedido, $status, $cliente);
+                        $pedidos->setItens($objects->getLastID("Pedidos"), $itens);
                     }
                     header("location: pedidos.php"); // redireciona para pagina dos pedidos
                 } else if (isset($_GET['id'])) {
                     $id = $_GET['id'];
+                    $itens = $pedidos->getItens($_GET['id']);
+                    for ($i=0;$i<count($itens);$i++) {
+                        $itens[$i] = $itens[$i]->produto;
+                    }
                     $pedidos = $pedidos->getPedido($_GET['id']);
                     $data_pedido = $pedidos->data;
                     $status = $pedidos->status;
@@ -99,6 +107,20 @@
                                 <?php endfor; ?>
                             </select>
                             <label>Cliente</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <?php
+                                $produtos = $objects->selectAll("Produtos");
+                            ?>
+                            <select name="itens[]" multiple>
+                                <option value="" disabled <?php if (!isset($_GET["id"])): ?>selected<?php endif; ?>>Escolha os produtos</option>
+                                <?php for ($i=0;$i<count($produtos);$i++):?>
+                                <option value="<?php echo $produtos[$i]->id; ?>" <?php if(in_array($produtos[$i]->id, $itens)): ?>selected<?php endif; ?>><?php echo $produtos[$i]->descricao; ?></option>
+                                <?php endfor; ?>
+                            </select>
+                            <label>Itens</label>
                         </div>
                     </div>
                     <button class="waves-effect waves-light btn-large blue"><i class="material-icons left">save</i>Salvar</button>

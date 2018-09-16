@@ -207,6 +207,26 @@ class Manager {
         }
     }
 
+    function searchJoin($table, $table2, $field, $search) {
+        $q = "SELECT *, NULL AS id, $table.id AS id1, $table2.id AS id2 FROM $table INNER JOIN $table2 ON $table.$field=$table2.id WHERE ";
+        $columns = $this->getColumns($table);
+        for ($i=0;$i<count($columns);$i++) {
+            $q .= "$table.".$columns[$i]." LIKE CONCAT('%', :value$i, '%') or ";
+        }
+        $q = substr($q, 0, -4);
+        $q .= ";";
+        try {
+            $query = $this->db->prepare($q);
+            for ($i=0;$i<count($columns);$i++) {
+                $query->bindValue(":value$i", $search, PDO::PARAM_STR);
+            }
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOExcepetion $e) {
+            return false;
+        }
+    }
+
     function getNumRegistros($table) {
         try {
             // Cria a query
@@ -225,6 +245,29 @@ class Manager {
             $query->bindValue(":id", $id, PDO::PARAM_INT);
             $query->execute(); // Executa a query
             return $query->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    function getRelations($table, $field, $value) {
+        try {
+            // Cria a query
+            $query = $this->db->prepare("SELECT * FROM $table WHERE $field=:id;");
+            $query->bindValue(":id", $value, PDO::PARAM_INT);
+            $query->execute(); // Executa a query
+            return $query->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    function getLastID($table) {
+        try {
+            // Cria a query
+            $query = $this->db->prepare("SELECT id FROM $table ORDER BY id DESC LIMIT 1;");
+            $query->execute(); // Executa a query
+            return $query->fetchAll(PDO::FETCH_OBJ)[0]->id;
         } catch (PDOException $e) {
             return false;
         }

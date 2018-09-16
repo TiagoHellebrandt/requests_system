@@ -45,7 +45,7 @@
                     if (!isset($_GET['search'])) {
                         $registros = $objects->selectAllJoin("Pedidos", "Clientes", "cliente");
                     } else {
-                        $registros = $objects->search("Pedidos", $_GET['search']);
+                        $registros = $objects->searchJoin("Pedidos", "Clientes", "cliente", $_GET['search']);
                     }
                     foreach ($registros as $registro):
                 ?>
