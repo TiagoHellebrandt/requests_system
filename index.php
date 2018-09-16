@@ -37,7 +37,7 @@
                         <div class="card-stacked">
                             <div class="card-content">
                                 <h3>Sistema de pedidos.</h3>
-                                <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                <p>Gerencie seus pedidos, produtos e clientes com facilidade e simplicidade.</p>
                             </div>
                             <div class="card-action">
                                 <a class="waves-effect waves-light btn-large blue" href="https://github.com/TiagoHellebrandtSilva/requests_system" target="_blank"><i class="icon ion-logo-github left"></i>Github</a>
