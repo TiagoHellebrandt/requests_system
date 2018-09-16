@@ -68,4 +68,14 @@ class Pedidos {
         return $objects->delete("Pedidos", $id);
     }
 
+    function getTotalItens($pedido) {
+        global $objects;
+        return $objects->getTotal("Itens", "pedido", $pedido);
+    }
+
+    function getTotalPedido($pedido) {
+        global $objects;
+        return $objects->getTotalSum("Itens", "Produtos", "pedido", "produto", "valor", $pedido);
+    }
+
 }

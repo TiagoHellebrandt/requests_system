@@ -1,5 +1,7 @@
 <?php
     require_once 'DAO/access.php';
+    require_once 'models/Pedidos.php';
+    $pedidos = new Pedidos();
 ?>
 
 <!DOCTYPE html>
@@ -53,8 +55,8 @@
                 <tr>
                     <td><a href="pedido.php?id=<?php echo $registro->id1; ?>"><?php echo $registro->id1; ?></a></td>
                     <td><?php echo $registro->data; ?></td>
-                    <td><?php echo $registro->data; ?></td>
-                    <td><?php echo $registro->data; ?></td>
+                    <td><?php echo $pedidos->getTotalItens($registro->id1); ?></td>
+                    <td><?php echo $pedidos->getTotalPedido($registro->id1); ?></td>
                     <td><?php echo $registro->nome; ?></td>
                     <td><?php echo $registro->status; ?></td>
                 </tr>

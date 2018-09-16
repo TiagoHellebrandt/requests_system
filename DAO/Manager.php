@@ -272,4 +272,28 @@ class Manager {
             return false;
         }
     }
+
+    function getTotal($table, $field, $id) {
+        try {
+            // Cria a query
+            $query = $this->db->prepare("SELECT count(*) FROM $table WHERE $field=:field;");
+            $query->bindValue(":field", $id, PDO::PARAM_INT);
+            $query->execute(); // Executa a query
+            return $query->fetchAll(PDO::FETCH_ASSOC)[0]["count(*)"];
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    function getTotalSum($table, $table2, $field, $field2, $sum, $id) {
+        try {
+            // Cria a query
+            $query = $this->db->prepare("SELECT sum($sum) FROM $table INNER JOIN $table2 ON $table.$field2=$table2.id WHERE $field=:field;");
+            $query->bindValue(":field", $id, PDO::PARAM_INT);
+            $query->execute(); // Executa a query
+            return $query->fetchAll(PDO::FETCH_ASSOC)[0]["sum($sum)"];
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
