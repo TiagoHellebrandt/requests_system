@@ -1,3 +1,7 @@
+<?php
+    require_once 'DAO/access.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,14 +29,47 @@
     
     <main>
         <div class="container">
+        <?php require_once 'templates/search.php' ?>
+        <table class="highlight responsive-table">
+            <thead>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Total de itens</th>
+                <th>Total do pedido</th>
+                <th>Cliente</th>
+                <th>Situação</th>
+            </thead>
 
-            <?php 
-                $table = 'Pedidos';
-                include 'templates/list.php';
-            ?>
+            <tbody>
+                <?php
+                    if (!isset($_GET['search'])) {
+                        $registros = $objects->selectAllJoin("Pedidos", "Clientes", "cliente");
+                    } else {
+                        $registros = $objects->search("Pedidos", $_GET['search']);
+                    }
+                    foreach ($registros as $registro):
+                ?>
+                
+                <tr>
+                    <td><a href="pedido.php?id=<?php echo $registro->id1; ?>"><?php echo $registro->id1; ?></a></td>
+                    <td><?php echo $registro->data; ?></td>
+                    <td><?php echo $registro->data; ?></td>
+                    <td><?php echo $registro->data; ?></td>
+                    <td><?php echo $registro->nome; ?></td>
+                    <td><?php echo $registro->status; ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
 
         </div>
     </main>
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large blue waves-effect" href="pedido.php">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
 
     <?php include_once './templates/footer.php' ?>
 </body>

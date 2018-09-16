@@ -141,6 +141,21 @@ class Manager {
     }
 
     /*
+    ** Retorna todos os registro de uma tabela com join
+    **
+    */
+    function selectAllJoin($table, $table2, $field) {
+        try {
+            // Cria a query
+            $query = $this->db->prepare("SELECT *, NULL AS id, $table.id AS id1, $table2.id AS id2 FROM $table INNER JOIN $table2 ON $table.$field=$table2.id;");
+            $query->execute(); // Executa a query
+            return $query->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    /*
     ** Retorna uma linha de uma tabela
     **
     */
@@ -148,6 +163,22 @@ class Manager {
         try {
             // Cria a query
             $query = $this->db->prepare("SELECT * FROM $table WHERE id=:id;");
+            $query->bindValue(":id", $id, PDO::PARAM_INT);
+            $query->execute(); // Executa a query
+            return $query->fetchAll(PDO::FETCH_OBJ)[0];
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    /*
+    ** Retorna uma linha de uma tabela com join
+    **
+    */
+    function getJoin($table, $table2, $field, $id) {
+        try {
+            // Cria a query
+            $query = $this->db->prepare("SELECT *, NULL AS id, $table.id AS id1, $table2.id AS id2 FROM $table WHERE id=:id INNER JOIN $table2 ON $table.$field=$table2.id;");
             $query->bindValue(":id", $id, PDO::PARAM_INT);
             $query->execute(); // Executa a query
             return $query->fetchAll(PDO::FETCH_OBJ)[0];
