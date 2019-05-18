@@ -3,7 +3,7 @@
 ## Descrição.
 Este projeto PHP é um sistema de pedidos básico que inclui um sistema de controle de clientes, produtos e pedidos.
 
-## Instação.
+## Instalação.
 1- Clone o repositório dentro da pasta de seu servidor local.
 
 2- Mude os valores das variaveis `$host`, `$user`, `$pass` com base em seu ambiente local contidas no método construtor da classe `Manager`, localizada em `DAO/Manager.php`. 
